@@ -4,11 +4,21 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Player {
 
-    static int[] location = new int[2];
+    static int location;
+
+    private static int health;
+
+    public static int getHealth() {
+        return health;
+    }
+
+    public static void setHealth(int health) {
+        Player.health = health;
+    }
 
     public static void create() {
-        location[0] = 0;
-        location[1] = 0;
+        location = 0;
+        health = 3;
     }
 
     @Override

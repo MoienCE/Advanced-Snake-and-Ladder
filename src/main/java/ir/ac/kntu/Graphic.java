@@ -1,6 +1,7 @@
 package ir.ac.kntu;
 
 import ir.ac.kntu.gamelogic.DataManager;
+import ir.ac.kntu.gamelogic.Player;
 
 import java.util.Arrays;
 
@@ -37,6 +38,12 @@ public class Graphic {
                 }
                 System.out.print("────┤\n");
             }
+        }
+    }
+    
+    public static void printStatus() {
+        for (int i = 0; i < Player.getHealth(); i++) {
+            System.out.print(" ♥");
         }
     }
 }

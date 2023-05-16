@@ -15,6 +15,7 @@ public class GameProcess {
         Player.create();
         DataManager.map[0] = " ** ";
         DataManager.map[DataManager.map.length -1] = "(  )";
+        Dice.setLastDice(Dice.NONE);
         for (int i = 0; i < DataManager.getCommonSnakesNumber(); i++) {
             CommonSnake.createCommonSnake(i);
         }
