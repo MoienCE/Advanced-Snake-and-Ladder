@@ -1,6 +1,7 @@
 package ir.ac.kntu.gamelogic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DataManager {
     //********* (Snake Data) *********
@@ -11,7 +12,9 @@ public class DataManager {
     private static int wildSnakesNumber;
 
     private static final ArrayList<CommonSnake> COMMON_SNAKES = new ArrayList<>();
+
     private static final ArrayList<KindSnake> KIND_SNAKES = new ArrayList<>();
+
     private static final ArrayList<WildSnake> WILD_SNAKES = new ArrayList<>();
 
     public static ArrayList<CommonSnake> getCommonSnakes() {
@@ -64,8 +67,12 @@ public class DataManager {
 
 
 
-    //********* (Map Data) *********
+    //********* (Graphic Data) *********
     private static int mapSize;
+
+    public static int getMapSizePawed() {
+        return mapSize*mapSize;
+    }
 
     public static int getMapSize() {
         return mapSize;
@@ -75,12 +82,10 @@ public class DataManager {
         DataManager.mapSize = mapSize;
     }
 
-    public static Object[][] map;
+    public static String[] map;
 
     public static void generateMap() {
-        map = new Object[mapSize][mapSize];
-        for (int i = 0; i < mapSize; i++)
-            for (int j = 0; j < mapSize; j++)
-                map[i][j] = Object.EMPTY;
+        map = new String[mapSize * mapSize];
+        Arrays.fill(map, "    ");
     }
 }

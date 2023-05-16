@@ -1,10 +1,11 @@
 package ir.ac.kntu.gamelogic;
 
-import ir.ac.kntu.Map;
+import ir.ac.kntu.Graphic;
 
 import java.util.Scanner;
 
 public class GameProcess {
+
     static Scanner scanner = new Scanner(System.in);
 
     public static void start() {
@@ -12,6 +13,8 @@ public class GameProcess {
         DataManager.generateMap();
         readSnakes();
         Player.create();
+        DataManager.map[0] = " ** ";
+        DataManager.map[DataManager.map.length -1] = "(  )";
         for (int i = 0; i < DataManager.getCommonSnakesNumber(); i++) {
             CommonSnake.createCommonSnake(i);
         }
@@ -21,7 +24,7 @@ public class GameProcess {
         for (int i = 0; i < DataManager.getWildSnakesNumber(); i++) {
             WildSnake.createWildSnake(i);
         }
-        Map.printMap();
+        Graphic.printMap();
     }
 
     public static void readSize() {
