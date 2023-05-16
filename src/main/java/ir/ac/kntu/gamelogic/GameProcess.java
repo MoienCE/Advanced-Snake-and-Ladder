@@ -9,7 +9,18 @@ public class GameProcess {
 
     public static void start() {
         readSize();
+        DataManager.generateMap();
         readSnakes();
+        Player.create();
+        for (int i = 0; i < DataManager.getCommonSnakesNumber(); i++) {
+            CommonSnake.createCommonSnake(i);
+        }
+        for (int i = 0; i < DataManager.getKindSnakesNumber(); i++) {
+            KindSnake.createKindSnake(i);
+        }
+        for (int i = 0; i < DataManager.getWildSnakesNumber(); i++) {
+            WildSnake.createWildSnake(i);
+        }
         Map.printMap();
     }
 
