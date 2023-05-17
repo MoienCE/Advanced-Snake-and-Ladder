@@ -30,6 +30,7 @@ public class GameProcess {
         Graphic.printMap();
         play();
     }
+
     public static void play() {
         while(true) {
             System.out.print("\n press Enter to dice... >> ");

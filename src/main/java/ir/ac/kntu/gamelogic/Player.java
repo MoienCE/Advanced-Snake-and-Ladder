@@ -54,6 +54,7 @@ public class Player {
                     health++;
                 }
             }
+            default -> System.out.println("he");
         }
     }
 
