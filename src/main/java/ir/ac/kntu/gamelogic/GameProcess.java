@@ -2,7 +2,6 @@ package ir.ac.kntu.gamelogic;
 
 import ir.ac.kntu.Graphic;
 
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class GameProcess {
@@ -16,7 +15,7 @@ public class GameProcess {
         Player.create();
         DataManager.map[0] = " ** ";
         DataManager.map[DataManager.map.length -1] = "(  )";
-        Dice.setLastDice(Dice.NONE);
+        DataManager.setCurrentDice(Dice.NONE);
         for (int i = 0; i < DataManager.getCommonSnakesNumber(); i++) {
             CommonSnake.createCommonSnake(i);
         }

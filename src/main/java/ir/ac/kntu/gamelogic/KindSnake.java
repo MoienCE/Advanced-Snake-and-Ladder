@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class KindSnake {
 
-    private int headLocation;
+    private final int headLocation;
 
     private int tailLocation;
 
@@ -16,21 +16,8 @@ public class KindSnake {
         this.id = id;
     }
 
-
     public int getHeadLocation() {
         return headLocation;
-    }
-
-    public int getTailLocation() {
-        return tailLocation;
-    }
-
-    public void setHeadLocation(int headLocation) {
-        this.headLocation = headLocation;
-    }
-
-    public void setTailLocation(int tailLocation) {
-        this.tailLocation = tailLocation;
     }
 
     public int getId() {

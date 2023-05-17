@@ -20,18 +20,6 @@ public class WildSnake {
         return headLocation;
     }
 
-    public int getTailLocation() {
-        return tailLocation;
-    }
-
-    public void setHeadLocation(int headLocation) {
-        this.headLocation = headLocation;
-    }
-
-    public void setTailLocation(int tailLocation) {
-        this.tailLocation = tailLocation;
-    }
-
     public int getId() {
         return id;
     }

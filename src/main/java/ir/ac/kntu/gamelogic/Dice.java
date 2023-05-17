@@ -9,16 +9,6 @@ public enum Dice {
 
     private static final Random PRNG = new Random();
 
-    private static Dice lastDice;
-
-    public static Dice getLastDice() {
-        return lastDice;
-    }
-
-    public static void setLastDice(Dice lastDice) {
-        Dice.lastDice = lastDice;
-    }
-
     public static void randomDice() {
         Dice[] dices = values();
         DataManager.setCurrentDice(dices[PRNG.nextInt(dices.length -1)]);

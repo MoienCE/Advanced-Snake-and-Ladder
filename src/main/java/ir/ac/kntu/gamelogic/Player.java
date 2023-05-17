@@ -1,7 +1,5 @@
 package ir.ac.kntu.gamelogic;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class Player {
 
     private static int location;
@@ -24,14 +22,6 @@ public class Player {
 
     public static void setLocation(int location) {
         Player.location = location;
-    }
-
-    public static int getPreviousLocation() {
-        return previousLocation;
-    }
-
-    public static void setPreviousLocation(int previousLocation) {
-        Player.previousLocation = previousLocation;
     }
 
     public static void create() {
