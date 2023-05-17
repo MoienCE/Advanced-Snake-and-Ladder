@@ -58,10 +58,29 @@ public class Player {
         }
     }
 
+    private static void isSnake() {
+        for (int i = 0; i < DataManager.getCommonSnakes().size(); i++) {
+            if (location == DataManager.getCommonSnakes().get(i).getHeadLocation()){
+                DataManager.getCommonSnakes().get(i).eat();
+            }
+        }
+        for (int i = 0; i < DataManager.getKindSnakes().size(); i++) {
+            if (location == DataManager.getKindSnakes().get(i).getHeadLocation()) {
+                DataManager.getKindSnakes().get(i).eat();
+            }
+        }
+        for (int i = 0; i < DataManager.getWildSnakes().size(); i++) {
+            if (location == DataManager.getWildSnakes().get(i).getHeadLocation()) {
+                DataManager.getWildSnakes().get(i).eat();
+            }
+        }
+    }
+
     private static void goUp() {
         if (location - DataManager.getMapSize() >= 0) {
             previousLocation = location;
             location -= DataManager.getMapSize();
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }
@@ -71,6 +90,7 @@ public class Player {
         if (location + DataManager.getMapSize() < DataManager.getMapSizePawed()) {
             previousLocation = location;
             location += DataManager.getMapSize();
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }
@@ -78,8 +98,10 @@ public class Player {
 
     private static void goLeft() {
         if (location % DataManager.getMapSize() != 0 && location - 1 >= 0) {
+
             previousLocation = location;
             location--;
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }
@@ -91,6 +113,7 @@ public class Player {
 
             previousLocation = location;
             location++;
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }
@@ -102,6 +125,7 @@ public class Player {
 
             previousLocation = location;
             location -= (DataManager.getMapSize() + 1);
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }
@@ -113,6 +137,7 @@ public class Player {
 
             previousLocation = location;
             location -= (DataManager.getMapSize() - 1);
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }
@@ -123,6 +148,7 @@ public class Player {
                 location + (DataManager.getMapSize() - 1) < DataManager.getMapSizePawed()) {
             previousLocation = location;
             location += (DataManager.getMapSize() - 1);
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }
@@ -134,6 +160,7 @@ public class Player {
 
             previousLocation = location;
             location += (DataManager.getMapSize() + 1);
+            isSnake();
             DataManager.map[previousLocation] = "    ";
             DataManager.map[location] = " ** ";
         }

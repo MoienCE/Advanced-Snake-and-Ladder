@@ -13,7 +13,7 @@ public class WildSnake {
     public WildSnake(int headLocation, int tailLocation, int id) {
         this.headLocation = headLocation;
         this.tailLocation = tailLocation;
-        this.id = id + 1;
+        this.id = id;
     }
 
     public int getHeadLocation() {
@@ -37,7 +37,8 @@ public class WildSnake {
     }
 
     public void eat() {
-        //TODO eating
+        Player.setLocation(this.tailLocation);
+        Player.setHealth(Player.getHealth() - 1);
     }
 
     public static void createWildSnake(int id) {
@@ -54,6 +55,40 @@ public class WildSnake {
         DataManager.addWildSnake(new WildSnake(headLocation, tailLocation, id));
         DataManager.map[headLocation] = " \u001B[31m▟" + id + "\u001B[0m ";
         DataManager.map[tailLocation] = " \u001B[31m▘" + id + "\u001B[0m ";
+    }
+
+    public static void turn() {
+        for (int i = 0; i < DataManager.getWildSnakes().size(); i++) {
+            DataManager.getWildSnakes().get(i).refactor();
+        }
+    }
+
+    private void refactor() {
+        int headLocation;
+        do {
+            headLocation = ThreadLocalRandom.current().nextInt(2, DataManager.getMapSizePawed());
+        } while (!DataManager.map[headLocation].equals("    "));
+
+        int tailLocation;
+        do {
+            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
+        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation >= headLocation);
+
+        int previousHeadLocation = this.headLocation;
+        int previousTailLocation = this.tailLocation;
+
+        this.headLocation = headLocation;
+        this.tailLocation = tailLocation;
+
+        if (DataManager.map[previousHeadLocation].equals(" \u001B[31m▟" + this.id + "\u001B[0m ")) {
+            DataManager.map[previousHeadLocation] = "    ";
+        }
+        if (DataManager.map[previousTailLocation].equals(" \u001B[31m▘" + this.id + "\u001B[0m ")) {
+            DataManager.map[previousTailLocation] = "    ";
+        }
+
+        DataManager.map[headLocation] = " \u001B[31m▟" + this.id + "\u001B[0m ";
+        DataManager.map[tailLocation] = " \u001B[31m▘" + this.id + "\u001B[0m ";
     }
 
     @Override

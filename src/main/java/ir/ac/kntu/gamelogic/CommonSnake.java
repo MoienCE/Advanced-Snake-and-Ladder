@@ -37,7 +37,7 @@ public class CommonSnake {
     }
 
     public void eat() {
-        //TODO eating
+        Player.setLocation(this.tailLocation);
     }
 
     public static void createCommonSnake(int id) {

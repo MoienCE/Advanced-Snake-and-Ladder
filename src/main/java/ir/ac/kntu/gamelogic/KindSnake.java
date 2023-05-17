@@ -38,7 +38,7 @@ public class KindSnake {
     }
 
     public void eat() {
-        //TODO eating
+        Player.setLocation(this.tailLocation);
     }
 
     public static void createKindSnake(int id) {

@@ -39,6 +39,7 @@ public class GameProcess {
             Player.move();
             CommonSnake.turn();
             KindSnake.turn();
+            WildSnake.turn();
             Graphic.printMap();
             if (Player.getHealth() < 1) {
                 System.out.println("\nyou died.");
