@@ -2,6 +2,7 @@ package ir.ac.kntu.gamelogic;
 
 import ir.ac.kntu.Graphic;
 
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class GameProcess {
@@ -25,7 +26,28 @@ public class GameProcess {
         for (int i = 0; i < DataManager.getWildSnakesNumber(); i++) {
             WildSnake.createWildSnake(i);
         }
+        DataManager.setCurrentDice(Dice.NONE);
         Graphic.printMap();
+        play();
+    }
+    public static void play() {
+        while(true) {
+            System.out.print("\n press Enter to dice... >> ");
+            scanner.nextLine();
+            Dice.randomDice();
+            Player.move();
+            CommonSnake.turn();
+            KindSnake.turn();
+            Graphic.printMap();
+            if (Player.getHealth() < 1) {
+                System.out.println("\nyou died.");
+                break;
+            }
+            if (Player.getLocation() == DataManager.getMapSizePawed() - 1) {
+                System.out.println("\nyou won!");
+                break;
+            }
+        }
     }
 
     public static void readSize() {

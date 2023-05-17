@@ -67,7 +67,7 @@ public class DataManager {
 
 
 
-    //********* (Graphic Data) *********
+    //********* (Map Data) *********
     private static int mapSize;
 
     public static int getMapSizePawed() {
@@ -87,5 +87,17 @@ public class DataManager {
     public static void generateMap() {
         map = new String[mapSize * mapSize];
         Arrays.fill(map, "    ");
+    }
+
+
+    //********* (Dice Data) *********
+    private static Dice currentDice;
+
+    public static Dice getCurrentDice() {
+        return currentDice;
+    }
+
+    public static void setCurrentDice(Dice currentDice) {
+        DataManager.currentDice = currentDice;
     }
 }

@@ -19,8 +19,8 @@ public enum Dice {
         Dice.lastDice = lastDice;
     }
 
-    public static Dice randomDice() {
+    public static void randomDice() {
         Dice[] dices = values();
-        return dices[PRNG.nextInt(dices.length)];
+        DataManager.setCurrentDice(dices[PRNG.nextInt(dices.length -1)]);
     }
 }

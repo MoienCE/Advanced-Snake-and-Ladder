@@ -3,14 +3,13 @@ package ir.ac.kntu;
 import ir.ac.kntu.gamelogic.DataManager;
 import ir.ac.kntu.gamelogic.Player;
 
-import java.util.Arrays;
-
 public class Graphic {
 
     public static void printMap() {
         int length = DataManager.getMapSize();
         int height = (length * 2) + 1;
         int k = 0;
+        printStatus();
         for (int j = 0; j < height; j++) {
             if (j == 0) {
                 System.out.print("┌");
@@ -42,8 +41,12 @@ public class Graphic {
     }
     
     public static void printStatus() {
+        System.out.println("\n--------------------------");
+        System.out.print("health: ");
         for (int i = 0; i < Player.getHealth(); i++) {
-            System.out.print(" ♥");
+            System.out.print(" \u001B[31m♥\u001B[0m ");
         }
+        System.out.println();
+        System.out.println("Dice: " + DataManager.getCurrentDice());
     }
 }

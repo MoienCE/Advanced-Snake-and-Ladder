@@ -16,6 +16,7 @@ public class KindSnake {
         this.id = id;
     }
 
+
     public int getHeadLocation() {
         return headLocation;
     }
@@ -49,12 +50,32 @@ public class KindSnake {
         int tailLocation;
         do {
             tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation >= headLocation);
+        } while (!(DataManager.map[tailLocation].equals("    ")) || tailLocation < headLocation);
 
         DataManager.addKindSnake(new KindSnake(headLocation, tailLocation, id));
         DataManager.map[headLocation] = " \u001B[36m▟" + id + "\u001B[0m ";
         DataManager.map[tailLocation] = " \u001B[36m▘" + id + "\u001B[0m ";
     }
+
+    public static void turn() {
+        for (int i = 0; i < DataManager.getKindSnakes().size(); i++) {
+            DataManager.getKindSnakes().get(i).changeTail();
+        }
+    }
+
+    private void changeTail() {
+        int tailLocation;
+        do {
+            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
+        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation < headLocation);
+        int previousTailLocation = this.tailLocation;
+        this.tailLocation = tailLocation;
+        if (DataManager.map[previousTailLocation].equals(" \u001B[36m▘" + this.id + "\u001B[0m ")) {
+            DataManager.map[previousTailLocation] = "    ";
+        }
+        DataManager.map[this.tailLocation] = " \u001B[36m▘" + id + "\u001B[0m ";
+    }
+
 
     @Override
     public String toString() {

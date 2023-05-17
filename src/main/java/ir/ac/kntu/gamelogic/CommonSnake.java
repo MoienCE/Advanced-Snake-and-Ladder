@@ -56,6 +56,27 @@ public class CommonSnake {
         DataManager.map[tailLocation] = " \u001B[33m▘" + id + "\u001B[0m ";
     }
 
+    public static void turn() {
+        for (int i = 0; i < DataManager.getCommonSnakes().size(); i++) {
+            DataManager.getCommonSnakes().get(i).changeTail();
+        }
+    }
+
+    private void changeTail() {
+        int tailLocation;
+
+        do {
+            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
+        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation >= headLocation);
+        int previousTailLocation = this.tailLocation;
+        this.tailLocation = tailLocation;
+        if (DataManager.map[previousTailLocation].equals(" \u001B[33m▘" + this.id + "\u001B[0m ")) {
+            DataManager.map[previousTailLocation] = "    ";
+        }
+        DataManager.map[this.tailLocation] = " \u001B[33m▘" + this.id + "\u001B[0m ";
+    }
+
+
     @Override
     public String toString() {
         return "\u001B[33m" + this.getId() + "\u001B[0m";
