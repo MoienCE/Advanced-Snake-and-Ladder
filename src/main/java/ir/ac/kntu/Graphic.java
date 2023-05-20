@@ -6,8 +6,7 @@ import ir.ac.kntu.gamelogic.Player;
 public class Graphic {
 
     public static void printMap() {
-        int length = DataManager.getMapSize();
-        int height = (length * 2) + 1;
+        int length = DataManager.getMapSize(), height = (length * 2) + 1;
         int k = 0;
         printStatus();
         for (int j = 0; j < height; j++) {
@@ -26,7 +25,11 @@ public class Graphic {
             } else if (j % 2 == 1) {
                 System.out.print("│");
                 for (int i = 0; i < length; i++) {
-                    System.out.print(DataManager.map[k] + "│");
+                    if (k == Player.getLocation()) {
+                        System.out.print(" ** │");
+                    } else {
+                        System.out.print(DataManager.map[k] + "│");
+                    }
                     k++;
                 }
                 System.out.println();
@@ -49,4 +52,5 @@ public class Graphic {
         System.out.println();
         System.out.println("Dice: " + DataManager.getCurrentDice());
     }
+
 }

@@ -6,6 +6,25 @@ import java.util.Scanner;
 
 public class GameProcess {
 
+    private static final String WON = """
+            
+            Aaaaaaa... !
+                
+                ╱ ╭─────╮ ╲
+                  │ ⊙_⊙'│
+                ╲ ╰─────╯ ╱
+
+            you have won!
+            how is it possible????
+            You are elite (Idle)""";
+
+    private static final String DEAD = """
+            
+            🥳🥳🥳🥳🥳🥳🥳🥳🥳
+            🥳Congratulations!🥳
+            🥳    you died    🥳
+            🥳🥳🥳🥳🥳🥳🥳🥳🥳""";
+
     static Scanner scanner = new Scanner(System.in);
 
     public static void start() {
@@ -41,11 +60,11 @@ public class GameProcess {
             WildSnake.turn();
             Graphic.printMap();
             if (Player.getHealth() < 1) {
-                System.out.println("\nyou died.");
+                System.out.println(DEAD);
                 break;
             }
             if (Player.getLocation() == DataManager.getMapSizePawed() - 1) {
-                System.out.println("\nyou won!");
+                System.out.println(WON);
                 break;
             }
         }

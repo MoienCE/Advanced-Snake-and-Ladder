@@ -1,7 +1,5 @@
 package ir.ac.kntu.gamelogic;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class KindSnake {
 
     private final int headLocation;
@@ -29,19 +27,15 @@ public class KindSnake {
     }
 
     public static void createKindSnake(int id) {
-        int headLocation;
-        do {
-            headLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[headLocation].equals("    "));
+        System.out.println("\n--- creating kind snake " + id + " ---");
 
-        int tailLocation;
-        do {
-            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!(DataManager.map[tailLocation].equals("    ")) || tailLocation < headLocation);
+        int headLocation = Utilities.getRandom(Utilities.emptyPlaces());
+        DataManager.map[headLocation] = " \u001B[36m▟" + id + "\u001B[0m ";
+
+        int tailLocation = Utilities.getRandom(Utilities.epKind(headLocation));
+        DataManager.map[tailLocation] = " \u001B[36m▘" + id + "\u001B[0m ";
 
         DataManager.addKindSnake(new KindSnake(headLocation, tailLocation, id));
-        DataManager.map[headLocation] = " \u001B[36m▟" + id + "\u001B[0m ";
-        DataManager.map[tailLocation] = " \u001B[36m▘" + id + "\u001B[0m ";
     }
 
     public static void turn() {
@@ -51,15 +45,13 @@ public class KindSnake {
     }
 
     private void changeTail() {
-        int tailLocation;
-        do {
-            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation < headLocation);
-        int previousTailLocation = this.tailLocation;
-        this.tailLocation = tailLocation;
-        if (DataManager.map[previousTailLocation].equals(" \u001B[36m▘" + this.id + "\u001B[0m ")) {
-            DataManager.map[previousTailLocation] = "    ";
+        System.out.println("\n--- editing kind snake " + id + " ---");
+
+        if (DataManager.map[this.tailLocation].equals(" \u001B[36m▘" + this.id + "\u001B[0m ")) {
+            DataManager.map[this.tailLocation] = "    ";
         }
+
+        this.tailLocation = Utilities.getRandom(Utilities.epKind(this.headLocation));
         DataManager.map[this.tailLocation] = " \u001B[36m▘" + id + "\u001B[0m ";
     }
 

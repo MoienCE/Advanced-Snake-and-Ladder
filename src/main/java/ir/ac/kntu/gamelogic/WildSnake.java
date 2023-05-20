@@ -1,7 +1,5 @@
 package ir.ac.kntu.gamelogic;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class WildSnake {
 
     private int headLocation;
@@ -30,19 +28,15 @@ public class WildSnake {
     }
 
     public static void createWildSnake(int id) {
-        int headLocation;
-        do {
-            headLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[headLocation].equals("    "));
+        System.out.println("\n--- creating wild snake " + id + " ---");
 
-        int tailLocation;
-        do {
-            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation >= headLocation);
+        int headLocation = Utilities.getRandom(Utilities.emptyPlaces());
+        DataManager.map[headLocation] = " \u001B[31m▟" + id + "\u001B[0m ";
+
+        int tailLocation = Utilities.getRandom(Utilities.emptyPlaces(headLocation));
+        DataManager.map[tailLocation] = " \u001B[31m▘" + id + "\u001B[0m ";
 
         DataManager.addWildSnake(new WildSnake(headLocation, tailLocation, id));
-        DataManager.map[headLocation] = " \u001B[31m▟" + id + "\u001B[0m ";
-        DataManager.map[tailLocation] = " \u001B[31m▘" + id + "\u001B[0m ";
     }
 
     public static void turn() {
@@ -52,31 +46,18 @@ public class WildSnake {
     }
 
     private void refactor() {
-        int headLocation;
-        do {
-            headLocation = ThreadLocalRandom.current().nextInt(2, DataManager.getMapSizePawed());
-        } while (!DataManager.map[headLocation].equals("    "));
+        System.out.println("\n--- editing wild snake " + id + " ---");
 
-        int tailLocation;
-        do {
-            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation >= headLocation);
-
-        int previousHeadLocation = this.headLocation;
-        int previousTailLocation = this.tailLocation;
-
-        this.headLocation = headLocation;
-        this.tailLocation = tailLocation;
-
-        if (DataManager.map[previousHeadLocation].equals(" \u001B[31m▟" + this.id + "\u001B[0m ")) {
-            DataManager.map[previousHeadLocation] = "    ";
-        }
-        if (DataManager.map[previousTailLocation].equals(" \u001B[31m▘" + this.id + "\u001B[0m ")) {
-            DataManager.map[previousTailLocation] = "    ";
+        DataManager.map[this.headLocation] = "    ";
+        if (DataManager.map[this.tailLocation].equals(" \u001B[31m▘" + this.id + "\u001B[0m ")) {
+            DataManager.map[this.tailLocation] = "    ";
         }
 
-        DataManager.map[headLocation] = " \u001B[31m▟" + this.id + "\u001B[0m ";
-        DataManager.map[tailLocation] = " \u001B[31m▘" + this.id + "\u001B[0m ";
+        this.headLocation = Utilities.getRandomPro(Utilities.emptyPlaces());
+        DataManager.map[this.headLocation] = " \u001B[31m▟" + this.id + "\u001B[0m ";
+
+        this.tailLocation = Utilities.getRandom(Utilities.emptyPlaces(this.headLocation));
+        DataManager.map[this.tailLocation] = " \u001B[31m▘" + this.id + "\u001B[0m ";
     }
 
     @Override

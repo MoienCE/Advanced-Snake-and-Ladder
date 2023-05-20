@@ -66,12 +66,11 @@ public class DataManager {
     }
 
 
-
     //********* (Map Data) *********
     private static int mapSize;
 
     public static int getMapSizePawed() {
-        return mapSize*mapSize;
+        return mapSize * mapSize;
     }
 
     public static int getMapSize() {
@@ -88,6 +87,8 @@ public class DataManager {
         map = new String[mapSize * mapSize];
         Arrays.fill(map, "    ");
     }
+
+
 
 
     //********* (Dice Data) *********

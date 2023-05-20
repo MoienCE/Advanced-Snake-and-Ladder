@@ -1,7 +1,5 @@
 package ir.ac.kntu.gamelogic;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class CommonSnake {
 
     private final int headLocation;
@@ -29,19 +27,15 @@ public class CommonSnake {
     }
 
     public static void createCommonSnake(int id) {
-        int headLocation;
-        do {
-            headLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[headLocation].equals("    "));
+        System.out.println("\n--- creating common snake " + id + " ---");
 
-        int tailLocation;
-        do {
-            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation >= headLocation);
+        int headLocation = Utilities.getRandom(Utilities.emptyPlaces());
+        DataManager.map[headLocation] = " \u001B[33m▟" + id + "\u001B[0m ";
+
+        int tailLocation = Utilities.getRandom(Utilities.emptyPlaces(headLocation));
+        DataManager.map[tailLocation] = " \u001B[33m▘" + id + "\u001B[0m ";
 
         DataManager.addCommonSnake(new CommonSnake(headLocation, tailLocation, id));
-        DataManager.map[headLocation] = " \u001B[33m▟" + id + "\u001B[0m ";
-        DataManager.map[tailLocation] = " \u001B[33m▘" + id + "\u001B[0m ";
     }
 
     public static void turn() {
@@ -51,16 +45,13 @@ public class CommonSnake {
     }
 
     private void changeTail() {
-        int tailLocation;
+        System.out.println("\n--- editing common snake " + id + " ---");
 
-        do {
-            tailLocation = ThreadLocalRandom.current().nextInt(0, DataManager.getMapSizePawed());
-        } while (!DataManager.map[tailLocation].equals("    ") || tailLocation >= headLocation);
-        int previousTailLocation = this.tailLocation;
-        this.tailLocation = tailLocation;
-        if (DataManager.map[previousTailLocation].equals(" \u001B[33m▘" + this.id + "\u001B[0m ")) {
-            DataManager.map[previousTailLocation] = "    ";
+        if (DataManager.map[this.tailLocation].equals(" \u001B[33m▘" + this.id + "\u001B[0m ")) {
+            DataManager.map[this.tailLocation] = "    ";
         }
+
+        this.tailLocation = Utilities.getRandom(Utilities.emptyPlaces(this.headLocation));
         DataManager.map[this.tailLocation] = " \u001B[33m▘" + this.id + "\u001B[0m ";
     }
 
