@@ -8,26 +8,35 @@ public class GameProcess {
 
     private static final String WON = """
             
-            Aaaaaaa... !
-                
-                ╱ ╭─────╮ ╲
-                  │ ⊙_⊙'│
-                ╲ ╰─────╯ ╱
-
+            
+            Aaaaaaa... !     ╭─────╮
+                             ╡ ⊙_⊙'╞
+                             ╰──╥──╯
             you have won!
             how is it possible????
-            You are elite (Idle)""";
+            You are elite (unemployed)""";
 
     private static final String DEAD = """
             
-            🥳🥳🥳🥳🥳🥳🥳🥳🥳
-            🥳Congratulations!🥳
-            🥳    you died    🥳
-            🥳🥳🥳🥳🥳🥳🥳🥳🥳""";
+            
+            🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳
+            🥳 Congratulations! 🥳
+            🥳     you died     🥳
+            🥳🥳🥳🥳🥳🥳🥳🥳🥳🥳""";
+
+    private static final String WELCOME = """
+            
+            ───────────────────────────
+               GRAND THEFT SNAKE  VI
+              ʀᴏᴄᴋsᴛᴀʀ ɢᴀᴍᴇs ᴘʀᴇsᴇɴᴛs
+            ───────────────────────────
+            
+            """;
 
     static Scanner scanner = new Scanner(System.in);
 
     public static void start() {
+        System.out.print(WELCOME);
         readSize();
         DataManager.generateMap();
         readSnakes();
@@ -71,18 +80,18 @@ public class GameProcess {
     }
 
     public static void readSize() {
-        System.out.print("size of the map: ");
+        System.out.print("    size of the map: ");
         DataManager.setMapSize(Integer.parseInt(scanner.nextLine()));
     }
 
     public static void readSnakes() {
-        System.out.print("number of common snakes: ");
+        System.out.print(" number of common snakes: ");
         DataManager.setCommonSnakesNumber(Integer.parseInt(scanner.nextLine()));
 
-        System.out.print("number of kind snakes: ");
+        System.out.print("  number of kind snakes: ");
         DataManager.setKindSnakesNumber(Integer.parseInt(scanner.nextLine()));
 
-        System.out.print("number of wild snakes: ");
+        System.out.print("  number of wild snakes: ");
         DataManager.setWildSnakesNumber(Integer.parseInt(scanner.nextLine()));
     }
 }

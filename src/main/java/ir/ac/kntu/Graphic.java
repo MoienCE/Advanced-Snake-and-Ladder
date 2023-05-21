@@ -11,17 +11,17 @@ public class Graphic {
         printStatus();
         for (int j = 0; j < height; j++) {
             if (j == 0) {
-                System.out.print("┌");
+                System.out.print("╭");
                 for (int i = 1; i < length; i++) {
                     System.out.print("────┬");
                 }
-                System.out.print("────┐\n");
+                System.out.print("────╮\n");
             } else if (j == height - 1) {
-                System.out.print("└");
+                System.out.print("╰");
                 for (int i = 1; i < length; i++) {
                     System.out.print("────┴");
                 }
-                System.out.print("────┘");
+                System.out.print("────╯");
             } else if (j % 2 == 1) {
                 System.out.print("│");
                 for (int i = 0; i < length; i++) {
